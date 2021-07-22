@@ -25,7 +25,7 @@ export default class SipRetryPlugin extends FlexPlugin {
       if (payload.id == 'OutboundCallCanceledGeneric') {
         setTimeout(() => {
           flex.Actions.invokeAction('StartOutboundCall', {
-            destination: 'sip:test1@jm-demo.sip.twilio.com',
+            destination: 'sip:test1@my-demo.sip.twilio.com', // Replace with your own sip user.
           });
         }, 500);
         // Remove notification
@@ -55,6 +55,7 @@ export default class SipRetryPlugin extends FlexPlugin {
     });
 
     // USE FOR TESTING: Simulates a failed call example
+    // Dial +12345 to make the call fail.
     flex.Actions.addListener('beforeStartOutboundCall', (payload) => {
       if (payload.destination == '+12345') {
         payload.destination = 'sip:12345@bogus.domain.com';
